@@ -24,3 +24,16 @@ void string_permutations(char *str, int len, void (*cb)(char *)) {
     string_permutations(str, last, cb);
   }
 }
+
+void string_permutations_with_repetitions(char *set, char *str, int len, void (*cb)(char *)) {
+  char c, *e, *p;
+  if (len < 1) {
+    (*cb)(str);
+    return;
+  }
+  e = set, p = str + len - 1;
+  while ((c = *e) != '\0') {
+    *p = c, ++e;
+    string_permutations_with_repetitions(set, str, len - 1, cb);
+  }
+}
